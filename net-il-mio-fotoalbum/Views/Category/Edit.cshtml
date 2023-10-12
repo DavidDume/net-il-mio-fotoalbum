@@ -1,0 +1,16 @@
+﻿@model Category
+
+<a href="@Url.Action("Index", "Category")">Indietro</a>
+<div class="container d-flex pt-5">
+    <form asp-controller="Category" asp-action="Update" asp-route-id="@Model.Id" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Nome:</strong>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

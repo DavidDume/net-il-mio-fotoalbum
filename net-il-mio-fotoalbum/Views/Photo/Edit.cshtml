@@ -1,0 +1,35 @@
+﻿@model PhotoFormModel
+
+<a href="@Url.Action("Index", "Photo")">Indietro</a>
+<div class="container d-flex pt-5">
+    <form asp-controller="Photo" asp-action="Update" asp-route-id="@Model.Photo.Id" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Nome:</strong>
+            <input asp-for="Photo.Title" />
+            <span asp-validation-for="@Model.Photo.Title"></span>
+        </div>
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Descrizione:</strong>
+            <input asp-for="@Model.Photo.Description" />
+            <span asp-validation-for="@Model.Photo.Description"></span>
+        </div>
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Immagine:</strong>
+            <input asp-for="@Model.Photo.Url" type="file" class="form-control-file" />
+            <span asp-validation-for="@Model.Photo.Url"></span>
+        </div>
+        <div class="form-group p-2">
+            <input asp-for="@Model.Photo.Visible" type="checkbox" class="form-check-input" id="flexCheckDefault" />
+            <label asp-for="@Model.Photo.Visible" class="form-check-label">Mostra in homepage</label>
+        </div>
+        <div class="mb-3">
+            <strong>Categorie:</strong>
+            <select asp-for="SelectedCategories" size="10" multiple="multiple" class="form-control mb-2 leftList" asp-items="@Model.Categories">
+            </select>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>

@@ -1,0 +1,16 @@
+﻿@if (User.IsInRole("ADMIN"))
+{
+    <a class="mx-2" href="@Url.Action("Edit", "Photo", new { Id = @Model.Id })">Modifica</a>
+
+}
+
+<div class="d-flex flex-column py-5">
+    <img class="m-auto" width="500" src="@Model.Url" alt="...">
+    <div class="px-5 py-4">
+
+        <div class="text-center">
+            <h1>@Model.Title</h1>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>

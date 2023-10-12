@@ -1,7 +1,76 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container bg-light" id="menu">
+    <div class="text-center pt-4 text-primary">
+        <h1>Galleria</h1>
+        
+    </div>
+
+    <div id="searchDiv">
+        <div class="form-field">
+            <label>Filtra per nome:</label>
+            <input id="back-search" placeholder="Nome" />
+        </div>
+    </div>
+    <a href="@Url.Action("Create", "Photo")" class="btn btn-primary my-2">Aggiungi foto</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col" class="col-2">ID</th>
+                <th scope="col" class="col-3">Foto</th>
+                <th scope="col" class="col-3">Titolo</th>
+                <th scope="col" class="col-3">Opzioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Length; i++)
+            {
+                <tr id="row-@Model[i].Id">
+                    <th class="align-middle" scope="row">@Model[i].Id</th>
+                    <td class="align-middle w-25 pe-5">
+                        <img class="" style="" src="/@Model[i].Url" alt="...">
+                    </td>
+                    <td id="title-@Model[i].Id" class="align-middle">@Model[i].Title</td>
+                    <td class="align-middle">
+                        <div class="d-flex">
+                            <a class="btn btn-custom btn-secondary" href="/photo/show/@Model[i].Id">
+                                Dettagli
+                            </a>
+                            <a class="btn btn-custom btn-secondary mx-1" href="/photo/edit/@Model[i].Id">
+                                Modifica
+                            </a>
+                            <a class="btn btn-custom btn-danger" href="/photo/Delete/@Model[i].Id">
+                                Elimina
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+@section Scripts
+    {
+    <script>
+        const searchDiv = document.querySelector("#back-search");
+
+        searchDiv.addEventListener("keyup", Search);
+
+        function Search() {
+            const rows = document.querySelectorAll("[id^='row']");
+            const titles = document.querySelectorAll("[id^='title']");
+
+            const searchTerm = searchDiv.value.toLowerCase();
+
+            rows.forEach((row, index) => {
+                const titleText = titles[index].textContent.toLowerCase();
+                const isVisible = titleText.includes(searchTerm);
+
+                row.style.display = isVisible ? "table-row" : "none";
+            });
+        }
+
+    </script>
+}

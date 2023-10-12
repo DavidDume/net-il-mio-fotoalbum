@@ -1,0 +1,31 @@
+﻿@model PhotoFormModel
+
+<a href="@Url.Action("Index", "Photo")">Indietro</a>
+<div class="container d-flex pt-5">
+    <form asp-controller="Photo" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Nome:</strong>
+            <input asp-for="Photo.Title" />
+            <span asp-validation-for="Photo.Title"></span>
+        </div>
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Descrizione:</strong>
+            <input asp-for="Photo.Description" />
+            <span asp-validation-for="Photo.Description"></span>
+        </div>
+        <div class="mb-3 d-flex justify-content-between">
+            <strong>Immagine:</strong>
+            <input asp-for="Photo.Url" type="file" class="form-control-file" />
+            <span asp-validation-for="Photo.Url"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Categorie:</strong>
+            <select asp-for="SelectedCategories" size="10" multiple="multiple" class="form-control mb-2 leftList" asp-items="@Model.Categories">
+            </select>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
