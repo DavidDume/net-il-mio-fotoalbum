@@ -23,7 +23,7 @@ namespace net_il_mio_fotoalbum.Controllers
             return View("Index", photoGallery);
         }
 
-        public IActionResult ApiIndex()
+        public IActionResult IndexUser()
         {
             return View();
         }
